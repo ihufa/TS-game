@@ -1,8 +1,9 @@
 
 import renderUnits from './draw'
 import moveUnits from './moveUnits'
+import inputHandler from './addSelector'
+import { state } from './state'
 import './interfaces'
-(function game() {
 const root = <HTMLCanvasElement> document.querySelector('#root')
 let ctx = root.getContext("2d");
 
@@ -21,6 +22,12 @@ const canvas = {
     width: root.width
 }
 
+let selectBox = {
+    xStart: 0,
+    yStart: 0,
+    xEnd: 0,
+    yEnd: 0
+}
 const test = {
     name: 'test',
     x: 200,
@@ -31,31 +38,18 @@ const test = {
     sizey: 40,
     color: yellow,
 }
-let selectBox = {
-    xStart: 0,
-    yStart: 0,
-    xEnd: 0,
-    yEnd: 0
-}
-
-const units: Array<Iunit> = [test] 
-const markedUnits: Array<Iunit> = [test]
-
-
 
 // ENGINE
 let start = Date.now()
 let timeElapsed = 0
 let framesElapsed = 0
-const engine = ():void => {
-    if(timeElapsed === 0) {
-        root.addEventListener('mouse', (e) => {
-            console.log('event', e)
-            selectBox.xStart = e.x
-            selectBox.yStart = e.y
-            root.addEventListener('mouseup')
-        })
-    }
+
+// Initiate listeners for clicking
+const initiate = () => {
+    inputHandler(root, selectBox)
+}
+
+const renderEngine = ():void => {
     let now = Date.now()
     timeElapsed = (now - start)/1000
 
@@ -63,14 +57,15 @@ const engine = ():void => {
         framesElapsed++
         ctx.fillStyle = black;
         ctx.fillRect(0, 0, root.width, root.height);
-        moveUnits(units)
-        renderUnits(canvas, units, selectBox)
+        moveUnits(state.units)
+        renderUnits(canvas, selectBox)
     }
 
-    window.requestAnimationFrame(engine)
+    window.requestAnimationFrame(renderEngine)
 }
-engine()
+renderEngine()
+initiate()
 
 
 
-})()
+

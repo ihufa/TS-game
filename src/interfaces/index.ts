@@ -7,6 +7,10 @@ interface Iunit {
     sizex: number,
     sizey: number,
     color: string,
+    moveCommand: boolean,
+    attackCommand: boolean,
+    gotoX: number,
+    gotoY: number
 }
 
 interface Icanvas {
