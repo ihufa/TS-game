@@ -25,3 +25,7 @@ interface IselectBox {
     xEnd: number,
     yEnd: number
 }
+interface Icoord {
+    x:number,
+    y:number
+}

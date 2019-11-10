@@ -22,10 +22,14 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
     function mouseup(e:MouseEvent):void {
         root.removeEventListener('mouseup', mouseup, false)
         root.removeEventListener('mousemove', mousemove, false)
-
+        const { xStart, xEnd, yStart, yEnd } = selectBox
+        const smallestX = xStart < xEnd ? xStart : xEnd
+        const biggestX = xStart < xEnd ? xEnd : xStart
+        const smallestY = yStart < yEnd ? yStart : yEnd
+        const biggestY = yStart < yEnd ? yEnd : yStart
         state.selectedUnits = state.units.filter(el =>
-            el.x > selectBox.xStart && el.x < selectBox.xEnd &&
-            el.y > selectBox.yStart && el.y < selectBox.yEnd
+            el.x > smallestX && el.x < biggestX &&
+            el.y > smallestY && el.y < biggestY
 )
         selectBox.xStart = 0
         selectBox.yStart = 0

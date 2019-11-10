@@ -1,7 +1,7 @@
 import { state } from './state'
 
 export default function draw(canvas: Icanvas, selectBox: IselectBox):void {
-    const { ctx, width, height } = canvas 
+    const { ctx, width, height } = canvas
     state.units.forEach(el => {
         ctx.fillStyle = el.color;
         ctx.fillRect(el.x, el.y, el.sizex, el.sizey)

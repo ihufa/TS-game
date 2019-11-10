@@ -15,7 +15,7 @@ const green = '#ffea00'
 const blue = '#0044ff'
 
 // settings
-const updateFrequency = 0.05 // seconds between each render
+const updateFrequency = 0.01 // seconds between each render
 const canvas = {
     ctx: ctx,
     height: root.height,
@@ -63,8 +63,10 @@ const renderEngine = ():void => {
 
     window.requestAnimationFrame(renderEngine)
 }
+
 renderEngine()
 initiate()
+
 
 
 
