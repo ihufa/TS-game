@@ -7,9 +7,7 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
     root.addEventListener('mousedown', mousedown, false)
 
     function mousedown(e:MouseEvent):void {
-        console.log('sel', state.selectedUnits)
         if(e.button === 0) {
-        console.log(e)
         selectBox.xStart = e.clientX
         selectBox.yStart = e.clientY
         selectBox.xEnd = e.clientX
@@ -31,6 +29,7 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
             el.x > smallestX && el.x < biggestX &&
             el.y > smallestY && el.y < biggestY
 )
+        state.preSelectedUnits = []
         selectBox.xStart = 0
         selectBox.yStart = 0
         selectBox.xEnd = 0
@@ -42,11 +41,19 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
     function mousemove(e:MouseEvent):void {
         selectBox.xEnd = e.clientX
         selectBox.yEnd = e.clientY
+        const { xStart, xEnd, yStart, yEnd } = selectBox
+        const smallestX = xStart < xEnd ? xStart : xEnd
+        const biggestX = xStart < xEnd ? xEnd : xStart
+        const smallestY = yStart < yEnd ? yStart : yEnd
+        const biggestY = yStart < yEnd ? yEnd : yStart
+        state.preSelectedUnits = state.units.filter(el =>
+            el.x > smallestX && el.x < biggestX &&
+            el.y > smallestY && el.y < biggestY
+)
     }
     
     function rightclick(e:MouseEvent):void {
         if(e.button === 2) {
-            console.log(e.clientX, e.clientY)
             state.selectedUnits.forEach(el => {
                 let x = el.x - e.clientX
                 let y = el.y - e.clientY

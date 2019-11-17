@@ -1,5 +1,5 @@
 
-import renderUnits from './draw'
+import draw from './draw'
 import moveUnits from './moveUnits'
 import inputHandler from './addSelector'
 import { state } from './state'
@@ -11,7 +11,7 @@ let ctx = root.getContext("2d");
 const black = '#000000'
 const red = '#ff0000'
 const yellow = '#f6ff00'
-const green = '#ffea00'
+const green = '#3ef238'
 const blue = '#0044ff'
 
 // settings
@@ -27,16 +27,6 @@ let selectBox = {
     yStart: 0,
     xEnd: 0,
     yEnd: 0
-}
-const test = {
-    name: 'test',
-    x: 200,
-    y: 300,
-    xvel: 1,
-    yvel: 1,
-    sizex: 30,
-    sizey: 40,
-    color: yellow,
 }
 
 // ENGINE
@@ -58,14 +48,20 @@ const renderEngine = ():void => {
         ctx.fillStyle = black;
         ctx.fillRect(0, 0, root.width, root.height);
         moveUnits(state.units)
-        renderUnits(canvas, selectBox)
+        draw(canvas, selectBox, marine)
     }
 
     window.requestAnimationFrame(renderEngine)
 }
 
+const startGame = ():void => {
 renderEngine()
 initiate()
+}
+// Img resource loading before game starts
+const marine = new Image()
+marine.addEventListener('load', () => startGame())
+marine.src = './media/marine.png'
 
 
 

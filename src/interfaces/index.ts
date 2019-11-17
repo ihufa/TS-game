@@ -1,11 +1,20 @@
+interface Ibuilding {
+    player: string,
+    name: string,
+    x: number,
+    y: number,
+    sizex: number,
+    sizey: number,
+    color: string,
+}
 interface Iunit {
+    player: string,
     name: string,
     x: number,
     y: number,
     xvel: number,
     yvel: number,
-    sizex: number,
-    sizey: number,
+    radius: number,
     color: string,
     moveCommand: boolean,
     attackCommand: boolean,
