@@ -7,6 +7,7 @@ interface Istate {
     selectedBuildings: Array<Ibuilding>
     preSelectedBuildings: Array<Ibuilding>
     units: Array<Iunit>
+    resources: Array<Iresource>
 }
 // colors
 const black = '#000000'
@@ -20,11 +21,12 @@ export var state: Istate = {
         player: 'PLAYER1',
         name: 'test1',
         type: 'marine',
-        x: 300,
-        y: 600,
+        speed: 2,
+        x: 500,
+        y: 300,
         xvel: 0,
         yvel: 0,
-        radius: 20,
+        radius: 15,
         color: green,
         moveCommand: false,
         attackCommand: false,
@@ -35,53 +37,12 @@ export var state: Istate = {
         player: 'PLAYER1',
         name: 'test2',
         type: 'marine',
-        x: 400,
-        y: 600,
+        speed: 2,
+        x: 550,
+        y: 350,
         xvel: 0,
         yvel: 0,
-        radius: 20,
-        color: green,
-        moveCommand: false,
-        attackCommand: false,
-        gotoX: 0,
-        gotoY: 0,
-    },{
-        player: 'PLAYER1',
-        name: 'test3',
-        type: 'marine',
-        x: 500,
-        y: 600,
-        xvel: 0,
-        yvel: 0,
-        radius: 20,
-        color: green,
-        moveCommand: false,
-        attackCommand: false,
-        gotoX: 0,
-        gotoY: 0,
-    },{
-        player: 'PLAYER1',
-        name: 'test4',
-        type: 'marine',
-        x: 600,
-        y: 600,
-        xvel: 0,
-        yvel: 0,
-        radius: 20,
-        color: green,
-        moveCommand: false,
-        attackCommand: false,
-        gotoX: 0,
-        gotoY: 0,
-    },{
-        player: 'PLAYER1',
-        name: 'test5',
-        type: 'marine',
-        x: 700,
-        y: 600,
-        xvel: 0,
-        yvel: 0,
-        radius: 20,
+        radius: 15,
         color: green,
         moveCommand: false,
         attackCommand: false,
@@ -92,12 +53,43 @@ export var state: Istate = {
         player: 'PLAYER1',
         name: 'test0',
         type: 'commandCenter',
-        x: 400,
-        y: 200,
+        x: 350,
+        y: 550,
         sizex: 30,
         sizey: 40,
         color: red,
     }],
+    resources: [
+        {
+            type: 'mineral',
+            x: 0,
+            y: 700,
+            value: 1500
+        },
+        {
+            type: 'mineral',
+            x: 37,
+            y: 650,
+            value: 1500
+        },
+        {
+            type: 'mineral',
+            x: 0,
+            y: 600,
+            value: 1500
+        },
+        {
+            type: 'mineral',
+            x: 37,
+            y: 550,
+            value: 1500
+        },
+        {
+            type: 'mineral',
+            x: 0,
+            y: 500,
+            value: 1500
+        }],
     selectedBuildings: [],
     preSelectedBuildings: [],
     selectedUnits: [],

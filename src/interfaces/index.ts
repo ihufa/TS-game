@@ -16,6 +16,7 @@ interface Iunit {
     y: number,
     xvel: number,
     yvel: number,
+    speed: number,
     radius: number,
     color: string,
     moveCommand: boolean,
@@ -42,9 +43,15 @@ interface Icoord {
 }
 interface Ipng {
     src: string
-    name: string
+    type: string
 }
 interface IloadedPng {
     element: HTMLImageElement
-    name: string
+    type: string
+}
+interface Iresource {
+    type: string
+    x: number
+    y: number
+    value: number
 }

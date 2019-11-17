@@ -8,6 +8,7 @@ const root = <HTMLCanvasElement> document.querySelector('#root')
 let ctx = root.getContext("2d");
 
 // colors
+const backgroundColor = '#665f4a'
 const black = '#000000'
 const red = '#ff0000'
 const yellow = '#f6ff00'
@@ -43,13 +44,13 @@ const renderEngine = ():void => {
     let now = Date.now()
     timeElapsed = (now - start)/1000
 
-    if(Math.floor(timeElapsed/updateFrequency)>framesElapsed) { // everything in each render goes here
+    //if(Math.floor(timeElapsed/updateFrequency)>framesElapsed) { // everything in each render goes here
         framesElapsed++
-        ctx.fillStyle = black;
+        ctx.fillStyle = backgroundColor;
         ctx.fillRect(0, 0, root.width, root.height);
         moveUnits(state.units)
         draw(canvas, selectBox)
-    }
+    //}
 
     window.requestAnimationFrame(renderEngine)
 }
@@ -61,26 +62,33 @@ initiate()
 
 const pngs:Array<Ipng> = [
     {
-        name: 'marine',
+        type: 'marine',
         src: './media/marine.png'
     },
     {
-        name: 'commandCenter',
+        type: 'commandCenter',
         src: './media/commandCenter.png'
+    },
+    {
+        type: 'mineral',
+        src: './media/minerals.png'
+    },
+    {
+        type: 'menu',
+        src: './media/menu.png'
     }
-
 ]
 // Img resource loading before game starts
 function loadResources(pngs:Array<Ipng>) {
     let counter = 0
     for(let i = 0; i<pngs.length; i++) {
         let newPng = {
-            name: pngs[i].name,
+            type: pngs[i].type,
             element: new Image()
         }
         newPng.element.addEventListener('load', () => {
         state.pngs.push(newPng)
-            console.log('loaded', newPng.name)
+            console.log('loaded', newPng.type)
             counter++
             if(counter === pngs.length) {
                 startGame()

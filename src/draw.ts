@@ -31,11 +31,15 @@ const orientation = (xvel: number, yvel: number):number => {
 export default function draw(canvas: Icanvas, selectBox: IselectBox):void {
     const { ctx, width, height } = canvas
     state.buildings.forEach(el => {
-        ctx.drawImage(state.pngs.filter(png => png.name === el.type)[0].element, el.x, el.y)
+        ctx.drawImage(state.pngs.filter(png => png.type === el.type)[0].element, el.x, el.y)
     })
     state.units.forEach(el => {
-        ctx.drawImage(state.pngs.filter(png => png.name === el.type)[0].element, orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-25, el.y-25, 50, 49)
+        ctx.drawImage(state.pngs.filter(png => png.type === el.type)[0].element, orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-17, el.y-17, 34, 34)
     })
+    state.resources.forEach(el => {
+        ctx.drawImage(state.pngs.filter(png => png.type === el.type)[0].element, el.x, el.y, 75, 50)
+    })
+    ctx.drawImage(state.pngs.filter(el => el.type === 'menu')[0].element, 0, 800)
     state.selectedBuildings.forEach(el => {
         ctx.beginPath();
         ctx.arc(el.x+0.5*el.sizex, el.y+0.5*el.sizey, (el.sizex+el.sizey)/2, 0, 2 * Math.PI, false);

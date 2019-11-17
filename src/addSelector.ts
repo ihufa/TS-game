@@ -58,11 +58,11 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
                 let x = el.x - e.clientX
                 let y = el.y - e.clientY
                 if(Math.abs(x) > Math.abs(y)) {
-                    el.xvel = -x/Math.abs(x)
-                    el.yvel = -y/Math.abs(x)
+                    el.xvel = -(x/Math.abs(x))*el.speed
+                    el.yvel = -(y/Math.abs(x))*el.speed
                 } else {
-                    el.xvel = -x/Math.abs(y)
-                    el.yvel = -y/Math.abs(y)
+                    el.xvel = -(x/Math.abs(y))*el.speed
+                    el.yvel = -(y/Math.abs(y))*el.speed
                 }
                 el.moveCommand = true
                 el.gotoX = e.clientX
