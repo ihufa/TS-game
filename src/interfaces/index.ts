@@ -1,6 +1,7 @@
 interface Ibuilding {
     player: string,
     name: string,
+    type: string,
     x: number,
     y: number,
     sizex: number,
@@ -10,6 +11,7 @@ interface Ibuilding {
 interface Iunit {
     player: string,
     name: string,
+    type: string,
     x: number,
     y: number,
     xvel: number,
@@ -37,4 +39,12 @@ interface IselectBox {
 interface Icoord {
     x:number,
     y:number
+}
+interface Ipng {
+    src: string
+    name: string
+}
+interface IloadedPng {
+    element: HTMLImageElement
+    name: string
 }

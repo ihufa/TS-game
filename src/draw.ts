@@ -6,7 +6,6 @@ const orientation = (xvel: number, yvel: number):number => {
     }
     const x = xvel
     const y = yvel
-    console.log('x,y', x, y)
     if (y > 0 && x > 0) {
         if(y/x > 3) return 0
         if(y/x < 1/3) return 6
@@ -29,14 +28,13 @@ const orientation = (xvel: number, yvel: number):number => {
     }
 }
 
-export default function draw(canvas: Icanvas, selectBox: IselectBox, marine:HTMLImageElement):void {
+export default function draw(canvas: Icanvas, selectBox: IselectBox):void {
     const { ctx, width, height } = canvas
     state.buildings.forEach(el => {
-        ctx.fillStyle = el.color;
-        ctx.fillRect(el.x, el.y, el.sizex, el.sizey)
+        ctx.drawImage(state.pngs.filter(png => png.name === el.type)[0].element, el.x, el.y)
     })
     state.units.forEach(el => {
-        ctx.drawImage(marine, orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-25, el.y-25, 50, 49)
+        ctx.drawImage(state.pngs.filter(png => png.name === el.type)[0].element, orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-25, el.y-25, 50, 49)
     })
     state.selectedBuildings.forEach(el => {
         ctx.beginPath();

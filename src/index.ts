@@ -48,7 +48,7 @@ const renderEngine = ():void => {
         ctx.fillStyle = black;
         ctx.fillRect(0, 0, root.width, root.height);
         moveUnits(state.units)
-        draw(canvas, selectBox, marine)
+        draw(canvas, selectBox)
     }
 
     window.requestAnimationFrame(renderEngine)
@@ -58,10 +58,38 @@ const startGame = ():void => {
 renderEngine()
 initiate()
 }
+
+const pngs:Array<Ipng> = [
+    {
+        name: 'marine',
+        src: './media/marine.png'
+    },
+    {
+        name: 'commandCenter',
+        src: './media/commandCenter.png'
+    }
+
+]
 // Img resource loading before game starts
-const marine = new Image()
-marine.addEventListener('load', () => startGame())
-marine.src = './media/marine.png'
+function loadResources(pngs:Array<Ipng>) {
+    let counter = 0
+    for(let i = 0; i<pngs.length; i++) {
+        let newPng = {
+            name: pngs[i].name,
+            element: new Image()
+        }
+        newPng.element.addEventListener('load', () => {
+        state.pngs.push(newPng)
+            console.log('loaded', newPng.name)
+            counter++
+            if(counter === pngs.length) {
+                startGame()
+            }
+        })
+        newPng.element.src = pngs[i].src
+    }
+}
+loadResources(pngs)
 
 
 

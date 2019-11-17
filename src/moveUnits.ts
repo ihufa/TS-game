@@ -8,7 +8,7 @@ export default function moveUnits(units:Array<Iunit>):void  {
         }
         let collision = checkCollisionUnitUnits(movingUnits[i], units)
         if(!collision && movingUnits[i].moveCommand) { 
-        movingUnits[i].x = movingUnits[i].x + movingUnits[i].xvel
+        movingUnits[i].x = movingUnits[i].x + movingUnits[i].xvel 
         movingUnits[i].y = movingUnits[i].y + movingUnits[i].yvel
         }
         if(collision && movingUnits[i].moveCommand) {
@@ -30,12 +30,10 @@ const checkCollisionUnitUnits = (unit: Iunit, units: Array<Iunit>): boolean => {
                 )
                 < units[i].radius+unit.radius 
         ) {
-            console.log('collision')
             return true
         }
     }
 }
-console.log('no collision')
 return false
 }
 
