@@ -1,7 +1,7 @@
 
 import draw from './draw'
 import moveUnits from './moveUnits'
-import inputHandler from './addSelector'
+import inputHandler from './inputHandler'
 import { state } from './state'
 import './interfaces'
 const root = <HTMLCanvasElement> document.querySelector('#root')

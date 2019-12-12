@@ -55,8 +55,7 @@ export var state: Istate = {
         type: 'commandCenter',
         x: 350,
         y: 550,
-        sizex: 30,
-        sizey: 40,
+        radius: 18,
         color: red,
     }],
     resources: [

@@ -42,14 +42,14 @@ export default function draw(canvas: Icanvas, selectBox: IselectBox):void {
     ctx.drawImage(state.pngs.filter(el => el.type === 'menu')[0].element, 0, 800)
     state.selectedBuildings.forEach(el => {
         ctx.beginPath();
-        ctx.arc(el.x+0.5*el.sizex, el.y+0.5*el.sizey, (el.sizex+el.sizey)/2, 0, 2 * Math.PI, false);
+        ctx.arc(el.x+0.5*el.radius, el.y+0.5*el.radius, (el.radius+el.radius)/2, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'
         ctx.lineWidth = 2
         ctx.stroke();
     })
     state.preSelectedBuildings.forEach(el => {
         ctx.beginPath();
-        ctx.arc(el.x+0.5*el.sizex, el.y+0.5*el.sizey, (el.sizex+el.sizey)/2, 0, 2 * Math.PI, false);
+        ctx.arc(el.x+0.5*el.radius, el.y+0.5*el.radius, (el.radius+el.radius)/2, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'
         ctx.lineWidth = 1
         ctx.stroke();

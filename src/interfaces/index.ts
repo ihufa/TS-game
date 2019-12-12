@@ -4,8 +4,7 @@ interface Ibuilding {
     type: string,
     x: number,
     y: number,
-    sizex: number,
-    sizey: number,
+    radius: number,
     color: string,
 }
 interface Iunit {
