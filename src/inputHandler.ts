@@ -28,7 +28,7 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
             selectBox.xEnd = 0
             selectBox.yEnd = 0
             state.selectedUnits = []
-            state.selectedUnits = []
+            state.selectedBuilding = undefined
             for(let i = 0; i < state.units.length; i++){
                 if( Math.pow((state.units[i].x - xStart), 2) + Math.pow((state.units[i].y - yStart), 2) < Math.pow(state.units[i].radius, 2)) {
                 state.selectedUnits = [state.units[i]]
@@ -38,7 +38,8 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
         if(!state.selectedUnits.length) {
             for(let i = 0; i < state.buildings.length; i++){
                 if( Math.pow((state.buildings[i].x - xStart), 2) + Math.pow((state.buildings[i].y - yStart), 2) < Math.pow(state.buildings[i].radius, 2)) {
-                state.selectedBuildings = [state.buildings[i]]
+                state.selectedBuilding = state.buildings[i]
+                spawnMarine(state.selectedBuilding.player, state.selectedBuilding.x, state.selectedBuilding.y)
                     break
             }
         }
@@ -54,10 +55,10 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
             el.y > smallestY && el.y < biggestY
 )
         if(!state.selectedUnits.length) {
-            state.selectedBuildings = state.buildings.filter(el => 
+            state.selectedBuilding = state.buildings.filter(el => 
                     el.x > smallestX && el.x < biggestX &&
                     el.y > smallestY && el.y < biggestY
-           )
+           )[0]
         }
         selectBox.xStart = 0
         selectBox.yStart = 0
@@ -67,7 +68,7 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
         if(state.selectedUnits.length) {
             root.addEventListener('mousedown', rightclick, false)
         }
-        if(state.selectedBuildings.length) {
+        if(state.selectedBuilding) {
             root.addEventListener('mousedown', rightclick, false)
             console.log('building selected')
         }

@@ -13,6 +13,10 @@ interface Iunit {
     type: string,
     x: number,
     y: number,
+    hp: number,
+    damage: number,
+    fireFrequency: number,
+    armor: number,
     xvel: number,
     yvel: number,
     speed: number,
@@ -40,13 +44,12 @@ interface Icoord {
     x:number,
     y:number
 }
-interface Ipng {
-    src: string
-    type: string
+
+interface IpngSources {
+    [key:string]:string
 }
-interface IloadedPng {
-    element: HTMLImageElement
-    type: string
+interface Ipngs {
+    [key:string]:HTMLImageElement
 }
 interface Iresource {
     type: string

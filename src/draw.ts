@@ -31,22 +31,23 @@ const orientation = (xvel: number, yvel: number):number => {
 export default function draw(canvas: Icanvas, selectBox: IselectBox):void {
     const { ctx, width, height } = canvas
     state.buildings.forEach(el => {
-        ctx.drawImage(state.pngs.filter(png => png.type === el.type)[0].element, el.x, el.y)
+        ctx.drawImage(state.pngs[el.type], el.x-el.radius, el.y-el.radius)
     })
     state.units.forEach(el => {
-        ctx.drawImage(state.pngs.filter(png => png.type === el.type)[0].element, orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-17, el.y-17, 34, 34)
+        ctx.drawImage(state.pngs[el.type], orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-17, el.y-17, 34, 34)
     })
     state.resources.forEach(el => {
-        ctx.drawImage(state.pngs.filter(png => png.type === el.type)[0].element, el.x, el.y, 75, 50)
+        ctx.drawImage(state.pngs[el.type], el.x, el.y, 75, 50)
     })
-    ctx.drawImage(state.pngs.filter(el => el.type === 'menu')[0].element, 0, 800)
-    state.selectedBuildings.forEach(el => {
+    if(state.selectedBuilding) { 
+    ctx.drawImage(state.pngs.menu, 0, 800)
         ctx.beginPath();
-        ctx.arc(el.x+0.5*el.radius, el.y+0.5*el.radius, (el.radius+el.radius)/2, 0, 2 * Math.PI, false);
+        ctx.arc(state.selectedBuilding.x, state.selectedBuilding.y, state.selectedBuilding.radius, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'
         ctx.lineWidth = 2
         ctx.stroke();
-    })
+    }
+
     state.preSelectedBuildings.forEach(el => {
         ctx.beginPath();
         ctx.arc(el.x+0.5*el.radius, el.y+0.5*el.radius, (el.radius+el.radius)/2, 0, 2 * Math.PI, false);

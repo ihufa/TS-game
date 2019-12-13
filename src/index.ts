@@ -60,41 +60,29 @@ renderEngine()
 initiate()
 }
 
-const pngs:Array<Ipng> = [
+const pngs:IpngSources = 
     {
-        type: 'marine',
-        src: './media/marine.png'
-    },
-    {
-        type: 'commandCenter',
-        src: './media/commandCenter.png'
-    },
-    {
-        type: 'mineral',
-        src: './media/minerals.png'
-    },
-    {
-        type: 'menu',
-        src: './media/menu.png'
+        marine: './media/marine.png',
+        commandCenter: './media/commandCenter.png',
+        mineral: './media/minerals.png',
+        menu: './media/menu.png'
     }
-]
+
 // Img resource loading before game starts
-function loadResources(pngs:Array<Ipng>) {
+function loadResources(pngs:IpngSources) {
     let counter = 0
-    for(let i = 0; i<pngs.length; i++) {
-        let newPng = {
-            type: pngs[i].type,
-            element: new Image()
-        }
-        newPng.element.addEventListener('load', () => {
-        state.pngs.push(newPng)
-            console.log('loaded', newPng.type)
+    const keys = Object.keys(pngs)
+    for(let i = 0; i<keys.length; i++) {
+        let newPng = new Image
+        newPng.addEventListener('load', () => {
+        state.pngs = { ...state.pngs, [keys[i]]: newPng}
+            console.log('loaded', newPng)
             counter++
-            if(counter === pngs.length) {
+            if(counter === keys.length) {
                 startGame()
             }
         })
-        newPng.element.src = pngs[i].src
+        newPng.src = pngs[keys[i]]
     }
 }
 loadResources(pngs)

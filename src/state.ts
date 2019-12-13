@@ -1,10 +1,10 @@
 
 interface Istate {
-    pngs: Array<IloadedPng>
+    pngs: Ipngs
     buildings:  Array<Ibuilding>
     selectedUnits:  Array<Iunit>
     preSelectedUnits:  Array<Iunit>
-    selectedBuildings: Array<Ibuilding>
+    selectedBuilding: Ibuilding
     preSelectedBuildings: Array<Ibuilding>
     units: Array<Iunit>
     resources: Array<Iresource>
@@ -16,46 +16,15 @@ const yellow = '#f6ff00'
 const green = '#00ff00'
 const blue = '#0044ff'
 export var state: Istate = {
-    pngs: [],
-    units: [{
-        player: 'PLAYER1',
-        name: 'test1',
-        type: 'marine',
-        speed: 2,
-        x: 500,
-        y: 300,
-        xvel: 0,
-        yvel: 0,
-        radius: 15,
-        color: green,
-        moveCommand: false,
-        attackCommand: false,
-        gotoX: 0,
-        gotoY: 0,
-    },
-    {
-        player: 'PLAYER1',
-        name: 'test2',
-        type: 'marine',
-        speed: 2,
-        x: 550,
-        y: 350,
-        xvel: 0,
-        yvel: 0,
-        radius: 15,
-        color: green,
-        moveCommand: false,
-        attackCommand: false,
-        gotoX: 0,
-        gotoY: 0,
-    }],
+    pngs: {},
+    units: [],
     buildings: [{
         player: 'PLAYER1',
         name: 'test0',
         type: 'commandCenter',
         x: 350,
         y: 550,
-        radius: 18,
+        radius: 75,
         color: red,
     }],
     resources: [
@@ -89,7 +58,7 @@ export var state: Istate = {
             y: 500,
             value: 1500
         }],
-    selectedBuildings: [],
+    selectedBuilding: undefined,
     preSelectedBuildings: [],
     selectedUnits: [],
     preSelectedUnits: []
