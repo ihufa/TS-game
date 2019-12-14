@@ -30,39 +30,50 @@ const orientation = (xvel: number, yvel: number):number => {
 
 export default function draw(canvas: Icanvas, selectBox: IselectBox):void {
     const { ctx, width, height } = canvas
-    state.buildings.forEach(el => {
-        ctx.drawImage(state.pngs[el.type], el.x-el.radius, el.y-el.radius)
+    const { buildings, units, resources, selectedBuilding, selectedUnits, preSelectedBuildings, preSelectedUnits, pngs, grid } = state
+    for(let i = 0; i<grid.length; i++) {
+        for(let j = 0; j<grid[0].length; j++) {
+            ctx.strokeStyle = '#00ff00'
+            ctx.strokeRect(i*30,j*30,30,30)
+            if(grid[i][j]) {
+                ctx.fillStyle = '#00ff00'
+                ctx.fillRect(i*30, j*30, 30, 30)
+            }
+        }
+    }
+    buildings.forEach(el => {
+        ctx.drawImage(pngs[el.type], el.gridX*30, el.gridY*30)
     })
-    state.units.forEach(el => {
-        ctx.drawImage(state.pngs[el.type], orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-17, el.y-17, 34, 34)
+    units.forEach(el => {
+        ctx.drawImage(pngs[el.type], orientation(el.xvel, el.yvel)*50, 0, 50, 49, el.x-17, el.y-17, 34, 34)
     })
-    state.resources.forEach(el => {
-        ctx.drawImage(state.pngs[el.type], el.x, el.y, 75, 50)
+    resources.forEach(el => {
+        ctx.drawImage(pngs[el.type], el.x, el.y, 75, 50)
     })
-    if(state.selectedBuilding) { 
-    ctx.drawImage(state.pngs.menu, 0, 800)
+    if(selectedBuilding) { 
+    ctx.drawImage(pngs.menu, 0, 800)
         ctx.beginPath();
-        ctx.arc(state.selectedBuilding.x, state.selectedBuilding.y, state.selectedBuilding.radius, 0, 2 * Math.PI, false);
+        ctx.arc(selectedBuilding.gridX, selectedBuilding.gridY, selectedBuilding.radius, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'
         ctx.lineWidth = 2
         ctx.stroke();
     }
 
-    state.preSelectedBuildings.forEach(el => {
+    preSelectedBuildings.forEach(el => {
         ctx.beginPath();
-        ctx.arc(el.x+0.5*el.radius, el.y+0.5*el.radius, (el.radius+el.radius)/2, 0, 2 * Math.PI, false);
+        ctx.arc(el.gridX*30, el.gridY*30, (el.radius+el.radius)/2, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'
         ctx.lineWidth = 1
         ctx.stroke();
     })
-    state.selectedUnits.forEach(el => {
+    selectedUnits.forEach(el => {
         ctx.beginPath();
         ctx.arc(el.x, el.y, el.radius+5, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'
         ctx.lineWidth = 2
         ctx.stroke();
     })
-    state.preSelectedUnits.forEach(el => {
+    preSelectedUnits.forEach(el => {
         ctx.beginPath();
         ctx.arc(el.x, el.y, el.radius+5, 0, 2 * Math.PI, false);
         ctx.strokeStyle = ' #00ff00'

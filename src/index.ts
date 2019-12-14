@@ -6,6 +6,7 @@ import { state } from './state'
 import './interfaces'
 const root = <HTMLCanvasElement> document.querySelector('#root')
 let ctx = root.getContext("2d");
+import spawnBuilding from './buildingFactories'
 
 // colors
 const backgroundColor = '#665f4a'
@@ -16,6 +17,9 @@ const green = '#3ef238'
 const blue = '#0044ff'
 
 // settings
+const gridWidth = 40 ;
+const gridHeight = 40 ;
+const gridSize = 30 ;
 const updateFrequency = 0.01 // seconds between each render
 const canvas = {
     ctx: ctx,
@@ -39,6 +43,15 @@ let framesElapsed = 0
 const initiate = () => {
     inputHandler(root, selectBox)
 }
+const createGrid = () => {
+    let column = []
+    for(let i = 0; i<gridWidth; i++) {
+        for(let j = 0; j<gridHeight; j++) {
+            column[j] = 0
+        }
+        state.grid[i] = [...column,]
+    }
+}
 
 const renderEngine = ():void => {
     let now = Date.now()
@@ -56,8 +69,10 @@ const renderEngine = ():void => {
 }
 
 const startGame = ():void => {
+createGrid()
 renderEngine()
 initiate()
+spawnBuilding('PLAYER1', 'commandCenter', 10, 20)
 }
 
 const pngs:IpngSources = 

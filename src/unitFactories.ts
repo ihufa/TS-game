@@ -3,8 +3,8 @@ import { state } from './state'
 export function spawnMarine(player: string, x:number, y:number) {
     state.units.push({
         player: player,
-        name: 'test1',
         type: 'marine',
+        hash: Math.random(),
         hp: 45,
         damage: 5,
         fireFrequency: 1,

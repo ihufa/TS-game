@@ -1,5 +1,6 @@
 
 interface Istate {
+    grid: any,
     pngs: Ipngs
     buildings:  Array<Ibuilding>
     selectedUnits:  Array<Iunit>
@@ -16,17 +17,10 @@ const yellow = '#f6ff00'
 const green = '#00ff00'
 const blue = '#0044ff'
 export var state: Istate = {
+    grid: [],
     pngs: {},
     units: [],
-    buildings: [{
-        player: 'PLAYER1',
-        name: 'test0',
-        type: 'commandCenter',
-        x: 350,
-        y: 550,
-        radius: 75,
-        color: red,
-    }],
+    buildings: [],
     resources: [
         {
             type: 'mineral',

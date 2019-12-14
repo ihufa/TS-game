@@ -1,6 +1,6 @@
 export function checkCollisionUnitUnits(unit: Iunit, units: Array<Iunit>): boolean {
     for(let i = 0; i<units.length; i++) {
-        if(units[i].name !== unit.name) {
+        if(units[i].hash !== unit.hash) {
           if(
             Math.sqrt(
                 Math.pow(((units[i].x)-(unit.x+unit.xvel)), 2) + 

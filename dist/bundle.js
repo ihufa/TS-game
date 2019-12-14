@@ -1,1 +1,196 @@
-!function(e){var t={};function n(i){if(t[i])return t[i].exports;var r=t[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=e,n.c=t,n.d=function(e,t,i){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:i})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var i=Object.create(null);if(n.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)n.d(i,r,function(t){return e[t]}.bind(null,r));return i},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=1)}([function(e,t){},function(e,t,n){"use strict";n.r(t);var i={pngs:{},units:[],buildings:[{player:"PLAYER1",name:"test0",type:"commandCenter",x:350,y:550,radius:75,color:"#ff0000"}],resources:[{type:"mineral",x:0,y:700,value:1500},{type:"mineral",x:37,y:650,value:1500},{type:"mineral",x:0,y:600,value:1500},{type:"mineral",x:37,y:550,value:1500},{type:"mineral",x:0,y:500,value:1500}],selectedBuilding:void 0,preSelectedBuildings:[],selectedUnits:[],preSelectedUnits:[]},r=function(e,t){if(0===e&&0===t)return 0;return t>0&&e>0?t/e>3?0:t/e<1/3?6:7:t<0&&e>0?t/e<-3?4:t/e>-1/3?6:5:t<0&&e<0?t/e<1/3?2:t/e>3?4:3:t>0&&e<0?t/e>-1/3?2:t/e<-3?0:1:void 0};function o(e,t){for(var n=0;n<t.length;n++)if(t[n].name!==e.name&&Math.sqrt(Math.pow(t[n].x-(e.x+e.xvel),2)+Math.pow(t[n].y-(e.y+e.yvel),2))<t[n].radius+e.radius)return!0;return!1}n(0);var a=function(){return(a=Object.assign||function(e){for(var t,n=1,i=arguments.length;n<i;n++)for(var r in t=arguments[n])Object.prototype.hasOwnProperty.call(t,r)&&(e[r]=t[r]);return e}).apply(this,arguments)},d=document.querySelector("#root"),l=d.getContext("2d"),u={ctx:l,height:d.height,width:d.width},s={xStart:0,yStart:0,xEnd:0,yEnd:0},c=Date.now(),f=function(){!function(e,t){function n(a){e.removeEventListener("mouseup",n,!1),e.removeEventListener("mousemove",r,!1);var d,l,u,s=t.xStart,c=t.xEnd,f=t.yStart,y=t.yEnd;if(Math.abs(s-c)+Math.abs(f-y)<5){t.xStart=0,t.yStart=0,t.xEnd=0,t.yEnd=0,i.selectedUnits=[],i.selectedBuilding=void 0;for(var m=0;m<i.units.length;m++)if(Math.pow(i.units[m].x-s,2)+Math.pow(i.units[m].y-f,2)<Math.pow(i.units[m].radius,2)){i.selectedUnits=[i.units[m]];break}if(!i.selectedUnits.length)for(m=0;m<i.buildings.length;m++)if(Math.pow(i.buildings[m].x-s,2)+Math.pow(i.buildings[m].y-f,2)<Math.pow(i.buildings[m].radius,2)){i.selectedBuilding=i.buildings[m],d=i.selectedBuilding.player,l=i.selectedBuilding.x,u=i.selectedBuilding.y,i.units.push({player:d,name:"test1",type:"marine",hp:45,damage:5,fireFrequency:1,armor:0,speed:2,x:l,y:u,xvel:0,yvel:0,radius:15,color:"white",moveCommand:!1,attackCommand:!1,gotoX:0,gotoY:0});break}}else{i.preSelectedUnits=[];var g=s<c?s:c,p=s<c?c:s,v=f<y?f:y,h=f<y?y:f;i.selectedUnits=i.units.filter((function(e){return e.x>g&&e.x<p&&e.y>v&&e.y<h})),i.selectedUnits.length||(i.selectedBuilding=i.buildings.filter((function(e){return e.x>g&&e.x<p&&e.y>v&&e.y<h}))[0]),t.xStart=0,t.yStart=0,t.xEnd=0,t.yEnd=0}i.selectedUnits.length&&e.addEventListener("mousedown",o,!1),i.selectedBuilding&&(e.addEventListener("mousedown",o,!1),console.log("building selected"))}function r(e){t.xEnd=e.clientX,t.yEnd=e.clientY;var n=t.xStart,r=t.xEnd,o=t.yStart,a=t.yEnd,d=n<r?n:r,l=n<r?r:n,u=o<a?o:a,s=o<a?a:o;i.preSelectedUnits=i.units.filter((function(e){return e.x>d&&e.x<l&&e.y>u&&e.y<s}))}function o(t){2===t.button?i.selectedUnits.forEach((function(e){var n=e.x-t.clientX,i=e.y-t.clientY;Math.abs(n)>Math.abs(i)?(e.xvel=-n/Math.abs(n)*e.speed,e.yvel=-i/Math.abs(n)*e.speed):(e.xvel=-n/Math.abs(i)*e.speed,e.yvel=-i/Math.abs(i)*e.speed),e.moveCommand=!0,e.gotoX=t.clientX,e.gotoY=t.clientY})):e.removeEventListener("mousedown",o,!1)}window.oncontextmenu=function(){return!1},e.addEventListener("mousedown",(function(i){0===i.button&&(t.xStart=i.clientX,t.yStart=i.clientY,t.xEnd=i.clientX,t.yEnd=i.clientY,e.addEventListener("mouseup",n,!1),e.addEventListener("mousemove",r,!1))}),!1)}(d,s)},y=function(){var e,t,n,a=Date.now();(a-c)/1e3,l.fillStyle="#665f4a",l.fillRect(0,0,d.width,d.height),function(e){for(var t=e.filter((function(e){return 0!==e.xvel||0!==e.yvel})),n=0;n<t.length;n++){Math.pow(t[n].x-t[n].gotoX,2)+Math.pow(t[n].y-t[n].gotoY,2)<100&&(t[n].xvel=0,t[n].yvel=0,t[n].moveCommand=!1);var i=o(t[n],e);!i&&t[n].moveCommand&&(t[n].x=t[n].x+t[n].xvel,t[n].y=t[n].y+t[n].yvel),i&&t[n].moveCommand&&(t[n].moveCommand=!1),i||t[n].moveCommand||(t[n].moveCommand=!0)}}(i.units),t=s,n=(e=u).ctx,e.width,e.height,i.buildings.forEach((function(e){n.drawImage(i.pngs[e.type],e.x-e.radius,e.y-e.radius)})),i.units.forEach((function(e){n.drawImage(i.pngs[e.type],50*r(e.xvel,e.yvel),0,50,49,e.x-17,e.y-17,34,34)})),i.resources.forEach((function(e){n.drawImage(i.pngs[e.type],e.x,e.y,75,50)})),i.selectedBuilding&&(n.drawImage(i.pngs.menu,0,800),n.beginPath(),n.arc(i.selectedBuilding.x,i.selectedBuilding.y,i.selectedBuilding.radius,0,2*Math.PI,!1),n.strokeStyle=" #00ff00",n.lineWidth=2,n.stroke()),i.preSelectedBuildings.forEach((function(e){n.beginPath(),n.arc(e.x+.5*e.radius,e.y+.5*e.radius,(e.radius+e.radius)/2,0,2*Math.PI,!1),n.strokeStyle=" #00ff00",n.lineWidth=1,n.stroke()})),i.selectedUnits.forEach((function(e){n.beginPath(),n.arc(e.x,e.y,e.radius+5,0,2*Math.PI,!1),n.strokeStyle=" #00ff00",n.lineWidth=2,n.stroke()})),i.preSelectedUnits.forEach((function(e){n.beginPath(),n.arc(e.x,e.y,e.radius+5,0,2*Math.PI,!1),n.strokeStyle=" #00ff00",n.lineWidth=1,n.stroke()})),n.strokeStyle=" #00ff00",n.strokeRect(t.xStart,t.yStart,t.xEnd-t.xStart,t.yEnd-t.yStart),window.requestAnimationFrame(y)},m=function(){y(),f()};!function(e){for(var t=0,n=Object.keys(e),r=function(r){var o=new Image;o.addEventListener("load",(function(){var e;i.pngs=a(a({},i.pngs),((e={})[n[r]]=o,e)),console.log("loaded",o),++t===n.length&&m()})),o.src=e[n[r]]},o=0;o<n.length;o++)r(o)}({marine:"./media/marine.png",commandCenter:"./media/commandCenter.png",mineral:"./media/minerals.png",menu:"./media/menu.png"})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./src/buildingFactories.ts":
+/*!**********************************!*\
+  !*** ./src/buildingFactories.ts ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return spawnBuilding; });\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ \"./src/state.ts\");\n\r\nfunction spawnBuilding(player, type, x, y) {\r\n    _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings.push({\r\n        player: player,\r\n        type: type,\r\n        gridX: x,\r\n        gridY: y,\r\n        gridSizeX: 5,\r\n        gridSizeY: 5,\r\n        radius: 75,\r\n        color: 'red',\r\n    });\r\n    for (var i = x; i < x + 5; i++) {\r\n        for (var j = y; j < y + 5; j++) {\r\n            _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].grid[i][j] = 1;\r\n        }\r\n    }\r\n    console.log(_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].grid);\r\n}\r\n\n\n//# sourceURL=webpack:///./src/buildingFactories.ts?");
+
+/***/ }),
+
+/***/ "./src/collisionDetection.ts":
+/*!***********************************!*\
+  !*** ./src/collisionDetection.ts ***!
+  \***********************************/
+/*! exports provided: checkCollisionUnitUnits */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"checkCollisionUnitUnits\", function() { return checkCollisionUnitUnits; });\nfunction checkCollisionUnitUnits(unit, units) {\r\n    for (var i = 0; i < units.length; i++) {\r\n        if (units[i].hash !== unit.hash) {\r\n            if (Math.sqrt(Math.pow(((units[i].x) - (unit.x + unit.xvel)), 2) +\r\n                Math.pow(((units[i].y) - (unit.y + unit.yvel)), 2))\r\n                < units[i].radius + unit.radius) {\r\n                return true;\r\n            }\r\n        }\r\n    }\r\n    return false;\r\n}\r\n// FOR CHECKING IF SPACE TO BUILD BUILDING\r\n// function checkCollisionBuildingBuilding(building:Ibuilding, buildings:Array<Ibuilding>):boolean {\r\n//     for(let i=0; i<buildings.length; i++) {\r\n//         if(buildings[i].name !== name) {\r\n//         if(\r\n//             isIn(buildings[i].x, buildings[i].x+buildings[i].sizex, building.x) && //top left corner\r\n//             isIn(buildings[i].y, buildings[i].y+buildings[i].sizey, building.y) ||\r\n//             isIn(buildings[i].x, buildings[i].x+buildings[i].sizex, building.x+building.sizex) && // top right corner\r\n//             isIn(buildings[i].y, buildings[i].y+buildings[i].sizey, building.y) ||\r\n//             isIn(buildings[i].x, buildings[i].x+buildings[i].sizex, building.x) && //bottom left corner\r\n//             isIn(buildings[i].y, buildings[i].y+buildings[i].sizey, building.y+building.sizey) ||\r\n//             isIn(buildings[i].x, buildings[i].x+buildings[i].sizex, building.x+building.sizex) && //bottom right corner\r\n//             isIn(buildings[i].y, buildings[i].y+buildings[i].sizey, building.y+building.sizey)\r\n//         )\r\n//             {\r\n//             return true\r\n//         }\r\n//     }\r\n//     }\r\n//     return false\r\n// }\r\nfunction isIn(x1, x2, point) {\r\n    if (point > x1 && point < x2) {\r\n        return true;\r\n    }\r\n    return false;\r\n}\r\n\n\n//# sourceURL=webpack:///./src/collisionDetection.ts?");
+
+/***/ }),
+
+/***/ "./src/draw.ts":
+/*!*********************!*\
+  !*** ./src/draw.ts ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return draw; });\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ \"./src/state.ts\");\n\r\nvar orientation = function (xvel, yvel) {\r\n    if (xvel === 0 && yvel === 0) {\r\n        return 0;\r\n    }\r\n    var x = xvel;\r\n    var y = yvel;\r\n    if (y > 0 && x > 0) {\r\n        if (y / x > 3)\r\n            return 0;\r\n        if (y / x < 1 / 3)\r\n            return 6;\r\n        return 7;\r\n    }\r\n    if (y < 0 && x > 0) {\r\n        if (y / x < -3)\r\n            return 4;\r\n        if (y / x > -1 / 3)\r\n            return 6;\r\n        return 5;\r\n    }\r\n    if (y < 0 && x < 0) {\r\n        if (y / x < 1 / 3)\r\n            return 2;\r\n        if (y / x > 3)\r\n            return 4;\r\n        return 3;\r\n    }\r\n    if (y > 0 && x < 0) {\r\n        if (y / x > -1 / 3)\r\n            return 2;\r\n        if (y / x < -3)\r\n            return 0;\r\n        return 1;\r\n    }\r\n};\r\nfunction draw(canvas, selectBox) {\r\n    var ctx = canvas.ctx, width = canvas.width, height = canvas.height;\r\n    var buildings = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings, units = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units, resources = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].resources, selectedBuilding = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding, selectedUnits = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits, preSelectedBuildings = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].preSelectedBuildings, preSelectedUnits = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].preSelectedUnits, pngs = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].pngs, grid = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].grid;\r\n    for (var i = 0; i < grid.length; i++) {\r\n        for (var j = 0; j < grid[0].length; j++) {\r\n            ctx.strokeStyle = '#00ff00';\r\n            ctx.strokeRect(i * 30, j * 30, 30, 30);\r\n            if (grid[i][j]) {\r\n                ctx.fillStyle = '#00ff00';\r\n                ctx.fillRect(i * 30, j * 30, 30, 30);\r\n            }\r\n        }\r\n    }\r\n    buildings.forEach(function (el) {\r\n        ctx.drawImage(pngs[el.type], el.gridX * 30, el.gridY * 30);\r\n    });\r\n    units.forEach(function (el) {\r\n        ctx.drawImage(pngs[el.type], orientation(el.xvel, el.yvel) * 50, 0, 50, 49, el.x - 17, el.y - 17, 34, 34);\r\n    });\r\n    resources.forEach(function (el) {\r\n        ctx.drawImage(pngs[el.type], el.x, el.y, 75, 50);\r\n    });\r\n    if (selectedBuilding) {\r\n        ctx.drawImage(pngs.menu, 0, 800);\r\n        ctx.beginPath();\r\n        ctx.arc(selectedBuilding.gridX, selectedBuilding.gridY, selectedBuilding.radius, 0, 2 * Math.PI, false);\r\n        ctx.strokeStyle = ' #00ff00';\r\n        ctx.lineWidth = 2;\r\n        ctx.stroke();\r\n    }\r\n    preSelectedBuildings.forEach(function (el) {\r\n        ctx.beginPath();\r\n        ctx.arc(el.gridX * 30, el.gridY * 30, (el.radius + el.radius) / 2, 0, 2 * Math.PI, false);\r\n        ctx.strokeStyle = ' #00ff00';\r\n        ctx.lineWidth = 1;\r\n        ctx.stroke();\r\n    });\r\n    selectedUnits.forEach(function (el) {\r\n        ctx.beginPath();\r\n        ctx.arc(el.x, el.y, el.radius + 5, 0, 2 * Math.PI, false);\r\n        ctx.strokeStyle = ' #00ff00';\r\n        ctx.lineWidth = 2;\r\n        ctx.stroke();\r\n    });\r\n    preSelectedUnits.forEach(function (el) {\r\n        ctx.beginPath();\r\n        ctx.arc(el.x, el.y, el.radius + 5, 0, 2 * Math.PI, false);\r\n        ctx.strokeStyle = ' #00ff00';\r\n        ctx.lineWidth = 1;\r\n        ctx.stroke();\r\n    });\r\n    ctx.strokeStyle = ' #00ff00';\r\n    ctx.strokeRect(selectBox.xStart, selectBox.yStart, selectBox.xEnd - selectBox.xStart, selectBox.yEnd - selectBox.yStart);\r\n}\r\n\n\n//# sourceURL=webpack:///./src/draw.ts?");
+
+/***/ }),
+
+/***/ "./src/index.ts":
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _draw__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./draw */ \"./src/draw.ts\");\n/* harmony import */ var _moveUnits__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./moveUnits */ \"./src/moveUnits.ts\");\n/* harmony import */ var _inputHandler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inputHandler */ \"./src/inputHandler.ts\");\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./state */ \"./src/state.ts\");\n/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./interfaces */ \"./src/interfaces/index.ts\");\n/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_interfaces__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var _buildingFactories__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./buildingFactories */ \"./src/buildingFactories.ts\");\nvar __assign = (undefined && undefined.__assign) || function () {\r\n    __assign = Object.assign || function(t) {\r\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n            s = arguments[i];\r\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\r\n                t[p] = s[p];\r\n        }\r\n        return t;\r\n    };\r\n    return __assign.apply(this, arguments);\r\n};\r\nvar __spreadArrays = (undefined && undefined.__spreadArrays) || function () {\r\n    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;\r\n    for (var r = Array(s), k = 0, i = 0; i < il; i++)\r\n        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)\r\n            r[k] = a[j];\r\n    return r;\r\n};\r\n\r\n\r\n\r\n\r\n\r\nvar root = document.querySelector('#root');\r\nvar ctx = root.getContext(\"2d\");\r\n\r\n// colors\r\nvar backgroundColor = '#665f4a';\r\nvar black = '#000000';\r\nvar red = '#ff0000';\r\nvar yellow = '#f6ff00';\r\nvar green = '#3ef238';\r\nvar blue = '#0044ff';\r\n// settings\r\nvar gridWidth = 40;\r\nvar gridHeight = 40;\r\nvar gridSize = 30;\r\nvar updateFrequency = 0.01; // seconds between each render\r\nvar canvas = {\r\n    ctx: ctx,\r\n    height: root.height,\r\n    width: root.width\r\n};\r\nvar selectBox = {\r\n    xStart: 0,\r\n    yStart: 0,\r\n    xEnd: 0,\r\n    yEnd: 0\r\n};\r\n// ENGINE\r\nvar start = Date.now();\r\nvar timeElapsed = 0;\r\nvar framesElapsed = 0;\r\n// Initiate listeners for clicking\r\nvar initiate = function () {\r\n    Object(_inputHandler__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(root, selectBox);\r\n};\r\nvar createGrid = function () {\r\n    var column = [];\r\n    for (var i = 0; i < gridWidth; i++) {\r\n        for (var j = 0; j < gridHeight; j++) {\r\n            column[j] = 0;\r\n        }\r\n        _state__WEBPACK_IMPORTED_MODULE_3__[\"state\"].grid[i] = __spreadArrays(column);\r\n    }\r\n};\r\nvar renderEngine = function () {\r\n    var now = Date.now();\r\n    timeElapsed = (now - start) / 1000;\r\n    //if(Math.floor(timeElapsed/updateFrequency)>framesElapsed) { // everything in each render goes here\r\n    framesElapsed++;\r\n    ctx.fillStyle = backgroundColor;\r\n    ctx.fillRect(0, 0, root.width, root.height);\r\n    Object(_moveUnits__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(_state__WEBPACK_IMPORTED_MODULE_3__[\"state\"].units);\r\n    Object(_draw__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(canvas, selectBox);\r\n    //}\r\n    window.requestAnimationFrame(renderEngine);\r\n};\r\nvar startGame = function () {\r\n    createGrid();\r\n    renderEngine();\r\n    initiate();\r\n    Object(_buildingFactories__WEBPACK_IMPORTED_MODULE_5__[\"default\"])('PLAYER1', 'commandCenter', 10, 20);\r\n};\r\nvar pngs = {\r\n    marine: './media/marine.png',\r\n    commandCenter: './media/commandCenter.png',\r\n    mineral: './media/minerals.png',\r\n    menu: './media/menu.png'\r\n};\r\n// Img resource loading before game starts\r\nfunction loadResources(pngs) {\r\n    var counter = 0;\r\n    var keys = Object.keys(pngs);\r\n    var _loop_1 = function (i) {\r\n        var newPng = new Image;\r\n        newPng.addEventListener('load', function () {\r\n            var _a;\r\n            _state__WEBPACK_IMPORTED_MODULE_3__[\"state\"].pngs = __assign(__assign({}, _state__WEBPACK_IMPORTED_MODULE_3__[\"state\"].pngs), (_a = {}, _a[keys[i]] = newPng, _a));\r\n            console.log('loaded', newPng);\r\n            counter++;\r\n            if (counter === keys.length) {\r\n                startGame();\r\n            }\r\n        });\r\n        newPng.src = pngs[keys[i]];\r\n    };\r\n    for (var i = 0; i < keys.length; i++) {\r\n        _loop_1(i);\r\n    }\r\n}\r\nloadResources(pngs);\r\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+
+/***/ }),
+
+/***/ "./src/inputHandler.ts":
+/*!*****************************!*\
+  !*** ./src/inputHandler.ts ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return inputHandler; });\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ \"./src/state.ts\");\n/* harmony import */ var _unitFactories__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./unitFactories */ \"./src/unitFactories.ts\");\n\r\n\r\nfunction inputHandler(root, selectBox) {\r\n    window.oncontextmenu = function () {\r\n        return false;\r\n    };\r\n    root.addEventListener('mousedown', mousedown, false);\r\n    function mousedown(e) {\r\n        if (e.button === 0) {\r\n            selectBox.xStart = e.clientX;\r\n            selectBox.yStart = e.clientY;\r\n            selectBox.xEnd = e.clientX;\r\n            selectBox.yEnd = e.clientY;\r\n            root.addEventListener('mouseup', mouseup, false);\r\n            root.addEventListener('mousemove', mousemove, false);\r\n        }\r\n    }\r\n    function mouseup(e) {\r\n        root.removeEventListener('mouseup', mouseup, false);\r\n        root.removeEventListener('mousemove', mousemove, false);\r\n        var xStart = selectBox.xStart, xEnd = selectBox.xEnd, yStart = selectBox.yStart, yEnd = selectBox.yEnd;\r\n        if (Math.abs(xStart - xEnd) + Math.abs(yStart - yEnd) < 5) {\r\n            selectBox.xStart = 0;\r\n            selectBox.yStart = 0;\r\n            selectBox.xEnd = 0;\r\n            selectBox.yEnd = 0;\r\n            _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits = [];\r\n            _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding = undefined;\r\n            for (var i = 0; i < _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units.length; i++) {\r\n                if (Math.pow((_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units[i].x - xStart), 2) + Math.pow((_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units[i].y - yStart), 2) < Math.pow(_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units[i].radius, 2)) {\r\n                    _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits = [_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units[i]];\r\n                    break;\r\n                }\r\n            }\r\n            if (!_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits.length) {\r\n                for (var i = 0; i < _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings.length; i++) {\r\n                    if (Math.pow((_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].gridX * _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].gridSizeX - xStart), 2) + Math.pow((_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].gridY * _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].gridSizeY - yStart), 2) < Math.pow(_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].radius, 2)) {\r\n                        _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i];\r\n                        Object(_unitFactories__WEBPACK_IMPORTED_MODULE_1__[\"spawnMarine\"])(_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding.player, _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding.gridX * _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].gridSizeX, _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding.gridY * _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings[i].gridSizeY);\r\n                        break;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n        else {\r\n            _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].preSelectedUnits = [];\r\n            var smallestX_1 = xStart < xEnd ? xStart : xEnd;\r\n            var biggestX_1 = xStart < xEnd ? xEnd : xStart;\r\n            var smallestY_1 = yStart < yEnd ? yStart : yEnd;\r\n            var biggestY_1 = yStart < yEnd ? yEnd : yStart;\r\n            _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units.filter(function (el) {\r\n                return el.x > smallestX_1 && el.x < biggestX_1 &&\r\n                    el.y > smallestY_1 && el.y < biggestY_1;\r\n            });\r\n            if (!_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits.length) {\r\n                _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].buildings.filter(function (el) {\r\n                    return el.gridX * el.gridSizeX > smallestX_1 && el.gridX * el.gridSizeX < biggestX_1 &&\r\n                        el.gridY * el.gridSizeY > smallestY_1 && el.gridY * el.gridSizeY < biggestY_1;\r\n                })[0];\r\n            }\r\n            selectBox.xStart = 0;\r\n            selectBox.yStart = 0;\r\n            selectBox.xEnd = 0;\r\n            selectBox.yEnd = 0;\r\n        }\r\n        if (_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits.length) {\r\n            root.addEventListener('mousedown', rightclick, false);\r\n        }\r\n        if (_state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedBuilding) {\r\n            root.addEventListener('mousedown', rightclick, false);\r\n            console.log('building selected');\r\n        }\r\n    }\r\n    function mousemove(e) {\r\n        selectBox.xEnd = e.clientX;\r\n        selectBox.yEnd = e.clientY;\r\n        var xStart = selectBox.xStart, xEnd = selectBox.xEnd, yStart = selectBox.yStart, yEnd = selectBox.yEnd;\r\n        var smallestX = xStart < xEnd ? xStart : xEnd;\r\n        var biggestX = xStart < xEnd ? xEnd : xStart;\r\n        var smallestY = yStart < yEnd ? yStart : yEnd;\r\n        var biggestY = yStart < yEnd ? yEnd : yStart;\r\n        _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].preSelectedUnits = _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units.filter(function (el) {\r\n            return el.x > smallestX && el.x < biggestX &&\r\n                el.y > smallestY && el.y < biggestY;\r\n        });\r\n    }\r\n    function rightclick(e) {\r\n        if (e.button === 2) {\r\n            _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].selectedUnits.forEach(function (el) {\r\n                var x = el.x - e.clientX;\r\n                var y = el.y - e.clientY;\r\n                if (Math.abs(x) > Math.abs(y)) {\r\n                    el.xvel = -(x / Math.abs(x)) * el.speed;\r\n                    el.yvel = -(y / Math.abs(x)) * el.speed;\r\n                }\r\n                else {\r\n                    el.xvel = -(x / Math.abs(y)) * el.speed;\r\n                    el.yvel = -(y / Math.abs(y)) * el.speed;\r\n                }\r\n                el.moveCommand = true;\r\n                el.gotoX = e.clientX;\r\n                el.gotoY = e.clientY;\r\n            });\r\n        }\r\n        else {\r\n            root.removeEventListener('mousedown', rightclick, false);\r\n        }\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/inputHandler.ts?");
+
+/***/ }),
+
+/***/ "./src/interfaces/index.ts":
+/*!*********************************!*\
+  !*** ./src/interfaces/index.ts ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\n\n//# sourceURL=webpack:///./src/interfaces/index.ts?");
+
+/***/ }),
+
+/***/ "./src/moveUnits.ts":
+/*!**************************!*\
+  !*** ./src/moveUnits.ts ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return moveUnits; });\n/* harmony import */ var _collisionDetection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./collisionDetection */ \"./src/collisionDetection.ts\");\n\r\nfunction moveUnits(units) {\r\n    var movingUnits = units.filter(function (el) { return el.xvel !== 0 || el.yvel !== 0; });\r\n    for (var i = 0; i < movingUnits.length; i++) {\r\n        if (Math.pow((movingUnits[i].x - movingUnits[i].gotoX), 2) + Math.pow((movingUnits[i].y - movingUnits[i].gotoY), 2) < 100) { //less than 10px from target\r\n            movingUnits[i].xvel = 0;\r\n            movingUnits[i].yvel = 0;\r\n            movingUnits[i].moveCommand = false;\r\n        }\r\n        var collision = Object(_collisionDetection__WEBPACK_IMPORTED_MODULE_0__[\"checkCollisionUnitUnits\"])(movingUnits[i], units);\r\n        if (!collision && movingUnits[i].moveCommand) {\r\n            movingUnits[i].x = movingUnits[i].x + movingUnits[i].xvel;\r\n            movingUnits[i].y = movingUnits[i].y + movingUnits[i].yvel;\r\n        }\r\n        if (collision && movingUnits[i].moveCommand) {\r\n            movingUnits[i].moveCommand = false;\r\n        }\r\n        if (!collision && !movingUnits[i].moveCommand) {\r\n            movingUnits[i].moveCommand = true;\r\n        }\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/moveUnits.ts?");
+
+/***/ }),
+
+/***/ "./src/state.ts":
+/*!**********************!*\
+  !*** ./src/state.ts ***!
+  \**********************/
+/*! exports provided: state */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"state\", function() { return state; });\n// colors\r\nvar black = '#000000';\r\nvar red = '#ff0000';\r\nvar yellow = '#f6ff00';\r\nvar green = '#00ff00';\r\nvar blue = '#0044ff';\r\nvar state = {\r\n    grid: [],\r\n    pngs: {},\r\n    units: [],\r\n    buildings: [],\r\n    resources: [\r\n        {\r\n            type: 'mineral',\r\n            x: 0,\r\n            y: 700,\r\n            value: 1500\r\n        },\r\n        {\r\n            type: 'mineral',\r\n            x: 37,\r\n            y: 650,\r\n            value: 1500\r\n        },\r\n        {\r\n            type: 'mineral',\r\n            x: 0,\r\n            y: 600,\r\n            value: 1500\r\n        },\r\n        {\r\n            type: 'mineral',\r\n            x: 37,\r\n            y: 550,\r\n            value: 1500\r\n        },\r\n        {\r\n            type: 'mineral',\r\n            x: 0,\r\n            y: 500,\r\n            value: 1500\r\n        }\r\n    ],\r\n    selectedBuilding: undefined,\r\n    preSelectedBuildings: [],\r\n    selectedUnits: [],\r\n    preSelectedUnits: []\r\n};\r\n\n\n//# sourceURL=webpack:///./src/state.ts?");
+
+/***/ }),
+
+/***/ "./src/unitFactories.ts":
+/*!******************************!*\
+  !*** ./src/unitFactories.ts ***!
+  \******************************/
+/*! exports provided: spawnMarine */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"spawnMarine\", function() { return spawnMarine; });\n/* harmony import */ var _state__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./state */ \"./src/state.ts\");\n\r\nfunction spawnMarine(player, x, y) {\r\n    _state__WEBPACK_IMPORTED_MODULE_0__[\"state\"].units.push({\r\n        player: player,\r\n        type: 'marine',\r\n        hash: Math.random(),\r\n        hp: 45,\r\n        damage: 5,\r\n        fireFrequency: 1,\r\n        armor: 0,\r\n        speed: 2,\r\n        x: x,\r\n        y: y,\r\n        xvel: 0,\r\n        yvel: 0,\r\n        radius: 15,\r\n        color: 'white',\r\n        moveCommand: false,\r\n        attackCommand: false,\r\n        gotoX: 0,\r\n        gotoY: 0,\r\n    });\r\n}\r\n\n\n//# sourceURL=webpack:///./src/unitFactories.ts?");
+
+/***/ })
+
+/******/ });

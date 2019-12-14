@@ -37,9 +37,9 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
         }
         if(!state.selectedUnits.length) {
             for(let i = 0; i < state.buildings.length; i++){
-                if( Math.pow((state.buildings[i].x - xStart), 2) + Math.pow((state.buildings[i].y - yStart), 2) < Math.pow(state.buildings[i].radius, 2)) {
+                if( Math.pow((state.buildings[i].gridX*state.buildings[i].gridSizeX - xStart), 2) + Math.pow((state.buildings[i].gridY*state.buildings[i].gridSizeY - yStart), 2) < Math.pow(state.buildings[i].radius, 2)) {
                 state.selectedBuilding = state.buildings[i]
-                spawnMarine(state.selectedBuilding.player, state.selectedBuilding.x, state.selectedBuilding.y)
+                spawnMarine(state.selectedBuilding.player, state.selectedBuilding.gridX*state.buildings[i].gridSizeX, state.selectedBuilding.gridY*state.buildings[i].gridSizeY)
                     break
             }
         }
@@ -56,8 +56,8 @@ export default function inputHandler(root:HTMLCanvasElement, selectBox:IselectBo
 )
         if(!state.selectedUnits.length) {
             state.selectedBuilding = state.buildings.filter(el => 
-                    el.x > smallestX && el.x < biggestX &&
-                    el.y > smallestY && el.y < biggestY
+                    el.gridX*el.gridSizeX > smallestX && el.gridX*el.gridSizeX < biggestX &&
+                    el.gridY*el.gridSizeY > smallestY && el.gridY*el.gridSizeY < biggestY
            )[0]
         }
         selectBox.xStart = 0

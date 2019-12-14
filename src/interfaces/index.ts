@@ -1,16 +1,17 @@
 interface Ibuilding {
     player: string,
-    name: string,
     type: string,
-    x: number,
-    y: number,
+    gridX: number,
+    gridY: number,
+    gridSizeX: number,
+    gridSizeY: number,
     radius: number,
     color: string,
 }
 interface Iunit {
     player: string,
-    name: string,
     type: string,
+    hash: number,
     x: number,
     y: number,
     hp: number,
